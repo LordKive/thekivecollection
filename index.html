@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Kive Collection</title>
+    <style>
+        /* Estilos Base e Reset */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f8f9fa; color: #222; padding-bottom: 40px; }
+        
+        /* Menu de Navegação Superior */
+        nav { background-color: #ffffff; border-bottom: 1px solid #eef0f2; padding: 15px 20px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 18px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; }
+        .nav-links { display: flex; list-style: none; gap: 20px; }
+        .nav-links a { text-decoration: none; color: #555; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover { color: #000; }
+        
+        /* Menu Suspenso (Dropdown) */
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-content { display: none; position: absolute; background-color: #fff; min-width: 160px; box-shadow: 0px 8px 16px rgba(0,0,0,0.1); border: 1px solid #eee; border-radius: 4px; margin-top: 5px; }
+        .dropdown-content a { color: #333; padding: 12px 16px; display: block; }
+        .dropdown-content a:hover { background-color: #f1f1f1; }
+        .dropdown:hover .dropdown-content { display: block; }
+
+        /* Seletor de Idiomas */
+        .lang-selector { display: flex; gap: 5px; }
+        .lang-btn { background: none; border: 1px solid #ccc; padding: 4px 8px; font-size: 12px; cursor: pointer; border-radius: 4px; }
+        .lang-btn.active { background-color: #111; color: #fff; border-color: #111; }
+
+        /* Banner Principal */
+        .hero-banner { 
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200') no-repeat center center/cover; 
+            height: 350px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            color: white; 
+            text-align: center; 
+            padding: 0 20px;
+        }
+        .hero-banner h1 { font-size: 36px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+        .hero-banner p { font-size: 16px; max-width: 600px; font-weight: 300; }
+
+        /* Container do Conteúdo */
+        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+        .category-section { margin-bottom: 60px; }
+        .category-title { font-size: 20px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #111; padding-bottom: 5px; display: inline-block; }
+        
+        /* Grid de Produtos */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: #fff; border-radius: 8px; border: 1px solid #eaeaea; overflow: hidden; transition: transform 0.2s; display: flex; flex-direction: column; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .card-img { width: 100%; height: 220px; background-color: #eaeaea; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 14px; }
+        .card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .product-title { font-size: 16px; font-weight: 600; color: #111; margin-bottom: 8px; }
+        .product-desc { font-size: 13px; color: #666; line-height: 1.5; margin-bottom: 20px; }
+        
+        /* Botão de Afiliado */
+        .btn-amazon { display: block; text-align: center; background-color: #ff9900; color: #111; font-weight: bold; font-size: 13px; padding: 12px; border-radius: 4px; text-decoration: none; transition: background 0.2s; }
+        .btn-amazon:hover { background-color: #e68a00; }
+
+        /* Rodapé / Aviso da Amazon */
+        footer { text-align: center; padding: 40px 20px; font-size: 11px; color: #999; border-top: 1px solid #eef0f2; background: #fff; margin-top: 60px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">The Kive Collection</div>
+        <ul class="nav-links">
+            <li class="dropdown">
+                <a href="#" id="nav-categories" class="dropbtn">Categorias ▼</a>
+                <div class="dropdown-content">
+                    <a href="#office" id="drop-office">Home Office</a>
+                    <a href="#nomad" id="drop-nomad">Nômade / Mochileiro</a>
+                    <a href="#selfcare" id="drop-selfcare">Auto Cuidado</a>
+                </div>
+            </li>
+            <li><a href="#blog" id="nav-blog">Blog</a></li>
+        </ul>
+        <div class="lang-selector">
+            <button class="lang-btn active" onclick="setLanguage('pt')">PT</button>
+            <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" onclick="setLanguage('es')">ES</button>
+        </div>
+    </nav>
+
+    <div class="hero-banner">
+        <h1 id="hero-title">The Kive Collection</h1>
+        <p id="hero-subtitle">Equipamentos e produtos testados por mim, selecionados para otimizar sua rotina, suas viagens e seu bem-estar.</p>
+    </div>
+
+    <div class="container">
+        
+        <section id="office" class="category-section">
+            <h2 class="category-title" id="title-office">Home Office & Produtividade</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-img">Imagem do Produto</div>
+                    <div class="card-content">
+                        <div>
+                            <h3 class="product-title">Teclado Mecânico Compacto</h3>
+                            <p class="product-desc" 
+                               data-pt="Melhorou 100% minha velocidade de digitação no escritório. Silencioso e excelente ergonomia para o dia todo." 
+                               data-en="100% improved my typing speed in the office. Quiet and excellent ergonomics for all-day use." 
+                               data-es="Mejoró al 100% mi velocidad de escritura en la oficina. Silencioso y excelente ergonomía para todo el día.">
+                               Melhorou 100% minha velocidade de digitação no escritório. Silencioso e excelente ergonomia para o dia todo.
+                            </p>
+                        </div>
+                        <a href="#" target="_blank" class="btn-amazon btn-text-market">Ver preço na Amazon</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="nomad" class="category-section">
+            <h2 class="category-title" id="title-nomad">Nômade & Mochileiro</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-img">Imagem do Produto</div>
+                    <div class="card-content">
+                        <div>
+                            <h3 class="product-title">Mochila de Viagem Transição 40L</h3>
+                            <p class="product-desc" 
+                               data-pt="O tamanho exato para viajar apenas com mala de mão. Super resistente e cheia de compartimentos tech." 
+                               data-en="The exact size for traveling with hand luggage only. Super durable and packed with tech compartments." 
+                               data-es="El tamaño exacto para viajar solo con equipaje de mano. Súper resistente y llena de compartimentos tech.">
+                               O tamanho exato para viajar apenas com mala de mão. Super resistente e cheia de compartimentos tech.
+                            </p>
+                        </div>
+                        <a href="#" target="_blank" class="btn-amazon btn-text-market">Ver preço na Amazon</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer id="footer-text">
+        Como Associado da Amazon, recebo comissão por compras qualificadas através dos links desta página.
+    </footer>
+
+    <script>
+        // Configurações de tradução global
+        const translations = {
+            pt: {
+                heroSubtitle: "Equipamentos e produtos testados por mim, selecionados para otimizar sua rotina, suas viagens e seu bem-estar.",
+                navCategories: "Categorias ▼",
+                navBlog: "Blog",
+                titleOffice: "Home Office & Produtividade",
+                titleNomad: "Nômade & Mochileiro",
+                btnAmazon: "Ver preço na Amazon",
+                footer: "Como Associado da Amazon, recebo comissão por compras qualificadas através dos links desta página."
+            },
+            en: {
+                heroSubtitle: "Gear and products tested by me, selected to optimize your routine, travels, and well-being.",
+                navCategories: "Categories ▼",
+                navBlog: "Blog",
+                titleOffice: "Home Office & Productivity",
+                titleNomad: "Nomad & Backpacker",
+                btnAmazon: "Check price on Amazon",
+                footer: "As an Amazon Associate, I earn from qualifying purchases through the links on this page."
+            },
+            es: {
+                heroSubtitle: "Equipos y productos probados por mí, seleccionados para optimizar tu rutina, tus viajes y tu bienestar.",
+                navCategories: "Categorías ▼",
+                navBlog: "Blog",
+                titleOffice: "Home Office y Productividad",
+                titleNomad: "Nómada y Mochilero",
+                btnAmazon: "Ver precio en Amazon",
+                footer: "Como Afiliado de Amazon, percibo dinero con las compras adscritas que cumplen los requisitos aplicables."
+            }
+        };
+
+        function setLanguage(lang) {
+            // Alterna classe ativa dos botões de idioma
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if(btn.innerText.toLowerCase() === lang) btn.classList.add('active');
+            });
+
+            // Altera textos fixos da interface
+            document.getElementById('hero-subtitle').innerText = translations[lang].heroSubtitle;
+            document.getElementById('nav-categories').innerText = translations[lang].navCategories;
+            document.getElementById('nav-blog').innerText = translations[lang].navBlog;
+            document.getElementById('title-office').innerText = translations[lang].titleOffice;
+            document.getElementById('title-nomad').innerText = translations[lang].titleNomad;
+            document.getElementById('footer-text').innerText = translations[lang].footer;
+            
+            document.querySelectorAll('.btn-text-market').forEach(btn => {
+                btn.innerText = translations[lang].btnAmazon;
+            });
+
+            // Altera dinamicamente as descrições nos cards
+            document.querySelectorAll('.product-desc').forEach(desc => {
+                desc.innerText = desc.getAttribute('data-' + lang);
+            });
+        }
+    </script>
+</body>
+</html>
